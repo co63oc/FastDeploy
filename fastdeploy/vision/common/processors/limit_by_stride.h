@@ -19,7 +19,7 @@
 namespace fastdeploy {
 namespace vision {
 
-/*! @brief Processor for LimitByStride images with given paramters.
+/*! @brief Processor for LimitByStride images with given parameters.
  */
 class FASTDEPLOY_DECL LimitByStride : public Processor {
  public:

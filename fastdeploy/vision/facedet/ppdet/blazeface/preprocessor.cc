@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "fastdeploy/vision/facedet/ppdet/blazeface/preprocessor.h"
+
 #include "fastdeploy/function/concat.h"
 #include "fastdeploy/function/pad.h"
 #include "fastdeploy/vision/common/processors/mat.h"
@@ -33,10 +34,12 @@ BlazeFacePreprocessor::BlazeFacePreprocessor(const std::string& config_file) {
            "Failed to create PaddleDetPreprocessor.");
 }
 
-bool BlazeFacePreprocessor::Run(std::vector<FDMat>* images, std::vector<FDTensor>* outputs,
-                                 std::vector<std::map<std::string, std::array<float, 2>>>* ims_info) {
+bool BlazeFacePreprocessor::Run(
+    std::vector<FDMat>* images, std::vector<FDTensor>* outputs,
+    std::vector<std::map<std::string, std::array<float, 2>>>* ims_info) {
   if (images->size() == 0) {
-    FDERROR << "The size of input images should be greater than 0." << std::endl;
+    FDERROR << "The size of input images should be greater than 0."
+            << std::endl;
     return false;
   }
   ims_info->resize(images->size());
@@ -61,10 +64,10 @@ bool BlazeFacePreprocessor::Run(std::vector<FDMat>* images, std::vector<FDTensor
     int origin_h = (*images)[i].Height();
     scale_factor_ptr[2 * i] = 1.0;
     scale_factor_ptr[2 * i + 1] = 1.0;
-    
+
     for (size_t j = 0; j < processors_.size(); ++j) {
       if (!(*(processors_[j].get()))(&((*images)[i]))) {
-        FDERROR << "Failed to processs image:" << i << " in "
+        FDERROR << "Failed to process image:" << i << " in "
                 << processors_[i]->Name() << "." << std::endl;
         return false;
       }
@@ -73,7 +76,7 @@ bool BlazeFacePreprocessor::Run(std::vector<FDMat>* images, std::vector<FDTensor
         scale_factor_ptr[2 * i + 1] = (*images)[i].Width() * 1.0 / origin_w;
       }
     }
-    
+
     if ((*images)[i].Height() > max_hw[0]) {
       max_hw[0] = (*images)[i].Height();
     }
@@ -129,21 +132,21 @@ bool BlazeFacePreprocessor::BuildPreprocessPipelineFromConfig() {
   for (const auto& op : cfg["Preprocess"]) {
     std::string op_name = op["type"].as<std::string>();
     if (op_name == "NormalizeImage") {
-        auto mean = op["mean"].as<std::vector<float>>();
-        auto std = op["std"].as<std::vector<float>>();
-        bool is_scale = true;
-        if (op["is_scale"]) {
-          is_scale = op["is_scale"].as<bool>();
-        }
-        std::string norm_type = "mean_std";
-        if (op["norm_type"]) {
-          norm_type = op["norm_type"].as<std::string>();
-        }
-        if (norm_type != "mean_std") {
-          std::fill(mean.begin(), mean.end(), 0.0);
-          std::fill(std.begin(), std.end(), 1.0);
-        }
-        processors_.push_back(std::make_shared<Normalize>(mean, std, is_scale));
+      auto mean = op["mean"].as<std::vector<float>>();
+      auto std = op["std"].as<std::vector<float>>();
+      bool is_scale = true;
+      if (op["is_scale"]) {
+        is_scale = op["is_scale"].as<bool>();
+      }
+      std::string norm_type = "mean_std";
+      if (op["norm_type"]) {
+        norm_type = op["norm_type"].as<std::string>();
+      }
+      if (norm_type != "mean_std") {
+        std::fill(mean.begin(), mean.end(), 0.0);
+        std::fill(std.begin(), std.end(), 1.0);
+      }
+      processors_.push_back(std::make_shared<Normalize>(mean, std, is_scale));
     } else if (op_name == "Resize") {
       bool keep_ratio = op["keep_ratio"].as<bool>();
       auto target_size = op["target_size"].as<std::vector<int>>();
@@ -204,4 +207,4 @@ bool BlazeFacePreprocessor::BuildPreprocessPipelineFromConfig() {
 
 }  // namespace vision
 
-}  // namespacefastdeploy
+}  // namespace fastdeploy

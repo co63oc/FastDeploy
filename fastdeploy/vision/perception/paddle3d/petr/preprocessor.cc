@@ -83,7 +83,7 @@ bool PetrPreprocessor::Apply(FDMatBatch* image_batch,
     FDMat* mat = &(image_batch->mats->at(i));
     for (size_t j = 0; j < processors_.size(); ++j) {
       if (!(*(processors_[j].get()))(mat)) {
-        FDERROR << "Failed to processs image:" << i << " in "
+        FDERROR << "Failed to process image:" << i << " in "
                 << processors_[j]->Name() << "." << std::endl;
         return false;
       }
@@ -101,8 +101,8 @@ bool PetrPreprocessor::Apply(FDMatBatch* image_batch,
   }
   memcpy(timestamp_ptr, timestamp.data(), num_cams * sizeof(float));
 
-  FDTensor* tensor = image_batch->Tensor(); // [num_cams,3,320,800]
-  tensor->ExpandDim(0); // [num_cams,3,320,800] -> [1,num_cams,3,320,800]
+  FDTensor* tensor = image_batch->Tensor();  // [num_cams,3,320,800]
+  tensor->ExpandDim(0);  // [num_cams,3,320,800] -> [1,num_cams,3,320,800]
   (*outputs)[0].SetExternalData(tensor->Shape(), tensor->Dtype(),
                                 tensor->Data(), tensor->device,
                                 tensor->device_id);

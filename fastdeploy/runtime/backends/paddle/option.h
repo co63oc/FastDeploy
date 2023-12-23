@@ -157,7 +157,7 @@ struct PaddleBackendOption {
   std::string model_file = "";   // Path of model file
   std::string params_file = "";  // Path of parameters file, can be empty
 
-  // load model and paramters from memory
+  // load model and parameters from memory
   bool model_from_memory_ = false;
 };
 }  // namespace fastdeploy

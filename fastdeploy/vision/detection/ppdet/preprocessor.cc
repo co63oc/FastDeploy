@@ -45,7 +45,8 @@ bool PaddleDetPreprocessor::BuildPreprocessPipelineFromConfig() {
     arch_ = cfg["arch"].as<std::string>();
   } else {
     FDERROR << "Please set model arch,"
-            << "support value : SOLOv2, YOLO, SSD, RetinaNet, RCNN, Face." << std::endl;
+            << "support value : SOLOv2, YOLO, SSD, RetinaNet, RCNN, Face."
+            << std::endl;
     return false;
   }
 
@@ -166,7 +167,7 @@ bool PaddleDetPreprocessor::Apply(FDMatBatch* image_batch,
     scale_factor_ptr[2 * i + 1] = 1.0;
     for (size_t j = 0; j < processors_.size(); ++j) {
       if (!(*(processors_[j].get()))(mat)) {
-        FDERROR << "Failed to processs image:" << i << " in "
+        FDERROR << "Failed to process image:" << i << " in "
                 << processors_[j]->Name() << "." << std::endl;
         return false;
       }

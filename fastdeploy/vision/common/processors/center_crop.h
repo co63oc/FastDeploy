@@ -24,7 +24,7 @@
 namespace fastdeploy {
 namespace vision {
 
-/*! @brief Processor for crop images in center with given type deafault is float.
+/*! @brief Processor for crop images in center with given type default is float.
  */
 class FASTDEPLOY_DECL CenterCrop : public Processor {
  public:

@@ -38,7 +38,7 @@ bool PPShiTuV2RecognizerPreprocessor::BuildPreprocessPipelineFromConfig() {
     return false;
   }
   // auto preprocess_cfg = cfg["PreProcess"]["transform_ops"];
-  // We use the key 'RecPreProcess' to denote the preprocess 
+  // We use the key 'RecPreProcess' to denote the preprocess
   // operators for PP-ShiTuV2 recognizer.
   auto preprocess_cfg = cfg["RecPreProcess"]["transform_ops"];
   processors_.push_back(std::make_shared<BGR2RGB>());
@@ -136,7 +136,7 @@ bool PPShiTuV2RecognizerPreprocessor::Apply(FDMatBatch* image_batch,
       image_batch->proc_lib = ProcLib::OPENCV;
     }
     if (!(*(processors_[j].get()))(image_batch)) {
-      FDERROR << "Failed to processs image in " << processors_[j]->Name() << "."
+      FDERROR << "Failed to process image in " << processors_[j]->Name() << "."
               << std::endl;
       return false;
     }

@@ -19,7 +19,7 @@
 namespace fastdeploy {
 namespace vision {
 
-/*! @brief Processor for tansform images from BGR to RGB.
+/*! @brief Processor for transform images from BGR to RGB.
  */
 class FASTDEPLOY_DECL BGR2RGB : public Processor {
  public:
@@ -38,7 +38,7 @@ class FASTDEPLOY_DECL BGR2RGB : public Processor {
   static bool Run(FDMat* mat, ProcLib lib = ProcLib::DEFAULT);
 };
 
-/*! @brief Processor for tansform images from RGB to BGR.
+/*! @brief Processor for transform images from RGB to BGR.
  */
 class FASTDEPLOY_DECL RGB2BGR : public Processor {
  public:
@@ -57,7 +57,7 @@ class FASTDEPLOY_DECL RGB2BGR : public Processor {
   static bool Run(FDMat* mat, ProcLib lib = ProcLib::DEFAULT);
 };
 
-/*! @brief Processor for tansform images from BGR to GRAY.
+/*! @brief Processor for transform images from BGR to GRAY.
  */
 class FASTDEPLOY_DECL BGR2GRAY : public Processor {
  public:
@@ -76,7 +76,7 @@ class FASTDEPLOY_DECL BGR2GRAY : public Processor {
   static bool Run(FDMat* mat, ProcLib lib = ProcLib::DEFAULT);
 };
 
-/*! @brief Processor for tansform images from RGB to GRAY.
+/*! @brief Processor for transform images from RGB to GRAY.
  */
 class FASTDEPLOY_DECL RGB2GRAY : public Processor {
  public:

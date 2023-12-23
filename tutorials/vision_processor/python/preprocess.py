@@ -83,7 +83,7 @@ if __name__ == "__main__":
     images = [mat1, mat2]
 
     args = parse_arguments()
-    # creae processor
+    # create processor
     preprocessor = CustomProcessor()
 
     # use CV-CUDA
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     for i in range(len(images)):
         images[i].print_info('images' + str(i) + ': ')
 
-    # run the Processer with CVCUDA
+    # run the Processor with CVCUDA
     outputs = preprocessor(images)
 
     # show output

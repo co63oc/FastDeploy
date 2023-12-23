@@ -41,7 +41,7 @@ class FASTDEPLOY_DECL YOLOv5Cls : public FastDeployModel {
   /** \brief Predict the classification result for an input image
    *
    * \param[in] img The input image data, comes from cv::imread(), is a 3-D array with layout HWC, BGR format
-   * \param[in] result The output classification result will be writen to this structure
+   * \param[in] result The output classification result will be written to this structure
    * \return true if the prediction successed, otherwise false
    */
   virtual bool Predict(const cv::Mat& img, ClassifyResult* result);

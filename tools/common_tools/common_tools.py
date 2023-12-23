@@ -8,7 +8,7 @@ def argsparser():
     parser.add_argument(
         'tools',
         choices=['compress', 'convert', 'simple_serving', 'paddle2coreml'])
-    ## argumentments for auto compression
+    ## arguments for auto compression
     parser.add_argument(
         '--config_path',
         type=str,

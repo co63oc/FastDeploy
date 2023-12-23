@@ -52,7 +52,7 @@ class FASTDEPLOY_DECL PaddleClasModel : public FastDeployModel {
   /** \brief DEPRECATED Predict the classification result for an input image, remove at 1.0 version
    *
    * \param[in] im The input image data, comes from cv::imread()
-   * \param[in] result The output classification result will be writen to this structure
+   * \param[in] result The output classification result will be written to this structure
    * \return true if the prediction successed, otherwise false
    */
   virtual bool Predict(cv::Mat* im, ClassifyResult* result, int topk = 1);

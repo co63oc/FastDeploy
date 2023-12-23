@@ -19,7 +19,7 @@
 namespace fastdeploy {
 namespace vision {
 
-/*! @brief Processor for Limit images by short edge with given paramters.
+/*! @brief Processor for Limit images by short edge with given parameters.
  */
 class LimitShort : public Processor {
  public:

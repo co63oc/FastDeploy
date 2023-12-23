@@ -44,28 +44,30 @@ bool PaddleClasPreprocessor::BuildPreprocessPipelineFromConfig() {
              "Require the transform information in yaml be Map type.");
     auto op_name = op.begin()->first.as<std::string>();
     if (op_name == "ResizeImage") {
-      if (op.begin()->second["resize_short"]){
-            int target_size = op.begin()->second["resize_short"].as<int>();
-            bool use_scale = false;
-            int interp = 1;
-            processors_.push_back(
-                std::make_shared<ResizeByShort>(target_size, 1, use_scale));
-      }else if (op.begin()->second["size"]){
+      if (op.begin()->second["resize_short"]) {
+        int target_size = op.begin()->second["resize_short"].as<int>();
+        bool use_scale = false;
+        int interp = 1;
+        processors_.push_back(
+            std::make_shared<ResizeByShort>(target_size, 1, use_scale));
+      } else if (op.begin()->second["size"]) {
         int width = 0;
         int height = 0;
-        if (op.begin()->second["size"].IsScalar()){
-            auto size = op.begin()->second["size"].as<int>();
-            width = size;
-            height = size;
-        }else{
-            auto size = op.begin()->second["size"].as<std::vector<int>>();
-            width = size[0];
-            height = size[1];
+        if (op.begin()->second["size"].IsScalar()) {
+          auto size = op.begin()->second["size"].as<int>();
+          width = size;
+          height = size;
+        } else {
+          auto size = op.begin()->second["size"].as<std::vector<int>>();
+          width = size[0];
+          height = size[1];
         }
         processors_.push_back(
             std::make_shared<Resize>(width, height, -1.0, -1.0, 1, false));
-      }else{
-        FDERROR << "Invalid params for ResizeImage for both 'size' and 'resize_short' are None" << std::endl;
+      } else {
+        FDERROR << "Invalid params for ResizeImage for both 'size' and "
+                   "'resize_short' are None"
+                << std::endl;
       }
 
     } else if (op_name == "CropImage") {
@@ -131,7 +133,7 @@ bool PaddleClasPreprocessor::Apply(FDMatBatch* image_batch,
       image_batch->proc_lib = ProcLib::OPENCV;
     }
     if (!(*(processors_[j].get()))(image_batch)) {
-      FDERROR << "Failed to processs image in " << processors_[j]->Name() << "."
+      FDERROR << "Failed to process image in " << processors_[j]->Name() << "."
               << std::endl;
       return false;
     }

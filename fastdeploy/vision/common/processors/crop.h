@@ -19,7 +19,7 @@
 namespace fastdeploy {
 namespace vision {
 
-/*! @brief Processor for crop images with given paramters.
+/*! @brief Processor for crop images with given parameters.
  */
 class FASTDEPLOY_DECL Crop : public Processor {
  public:

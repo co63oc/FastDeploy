@@ -18,7 +18,7 @@
 
 namespace fastdeploy {
 namespace vision {
-/*! @brief Processor for convert images with given paramters and permute images from HWC to CHW.
+/*! @brief Processor for convert images with given parameters and permute images from HWC to CHW.
  */
 class FASTDEPLOY_DECL ConvertAndPermute : public Processor {
  public:

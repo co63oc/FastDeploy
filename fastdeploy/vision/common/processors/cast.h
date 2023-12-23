@@ -24,7 +24,7 @@
 namespace fastdeploy {
 namespace vision {
 
-/*! @brief Processor for cast images with given type deafault is float.
+/*! @brief Processor for cast images with given type default is float.
  */
 class FASTDEPLOY_DECL Cast : public Processor {
  public:

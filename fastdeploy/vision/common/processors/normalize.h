@@ -18,7 +18,7 @@
 
 namespace fastdeploy {
 namespace vision {
-/*! @brief Processor for Normalize images with given paramters.
+/*! @brief Processor for Normalize images with given parameters.
  */
 class FASTDEPLOY_DECL Normalize : public Processor {
  public:

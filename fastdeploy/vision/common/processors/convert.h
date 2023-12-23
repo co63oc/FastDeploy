@@ -18,7 +18,7 @@
 
 namespace fastdeploy {
 namespace vision {
-/*! @brief Processor for convert images with given paramters.
+/*! @brief Processor for convert images with given parameters.
  */
 class FASTDEPLOY_DECL Convert : public Processor {
  public:
