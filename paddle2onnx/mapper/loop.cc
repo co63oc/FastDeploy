@@ -31,13 +31,16 @@ bool ModelExporter::IsLoopSupported(const PaddleParser& parser,
   for (size_t i = 0; i < out_info.size(); ++i) {
     auto iter = input_names.find(out_info[i].name);
     if (iter == input_names.end()) {
-      P2OLogger() << "Cannot find output:" << out_info[i].name << " in input tensors while converting operator 'while', Paddle2ONNX doesn't support this situation now." << std::endl;
+      P2OLogger() << "Cannot find output:" << out_info[i].name
+                  << " in input tensors while converting operator 'while', "
+                     "Paddle2ONNX doesn't support this situation now."
+                  << std::endl;
       return false;
     }
   }
   for (size_t i = 0; i < x_info.size(); ++i) {
     if (x_info[i].is_tensor_array) {
-      P2OLogger() << "LodTensorArray is not supported." << std::endl;
+      P2OLogger() << "DenseTensorArray is not supported." << std::endl;
       return false;
     }
   }
@@ -170,7 +173,8 @@ void ModelExporter::ExportLoop(const PaddleParser& parser, OnnxHelper* helper,
     if (x_info[i].is_tensor_array) {
       continue;
     }
-    if (std::find(x_names.begin(), x_names.end(), x_info[i].name) != x_names.end()) {
+    if (std::find(x_names.begin(), x_names.end(), x_info[i].name) !=
+        x_names.end()) {
       continue;
     }
     x_names.push_back(x_info[i].name);
@@ -178,7 +182,8 @@ void ModelExporter::ExportLoop(const PaddleParser& parser, OnnxHelper* helper,
   }
   for (size_t i = 0; i < x_info.size(); ++i) {
     if (x_info[i].is_tensor_array) {
-      if (std::find(x_names.begin(), x_names.end(), x_info[i].name) != x_names.end()) {
+      if (std::find(x_names.begin(), x_names.end(), x_info[i].name) !=
+          x_names.end()) {
         continue;
       }
       out_names.push_back(x_info[i].name);
